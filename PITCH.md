@@ -3,7 +3,7 @@
 
 ---
 
-## 🎬 [0:00 - 0:30] The Hook & Problem (Criterion: Problem Solving)
+## 🎬 [0:00 - 0:30] The Hook & The Problem
 "Hello Judges, we are Team Git Push Pray. 
 
 Right now, in 2026, there are over **150 Million Indian farmers** who do not have a smartphone. They do not have 4G internet. They cannot use the cool web apps or ChatGPT wrappers everyone else is building today. 
@@ -14,7 +14,7 @@ We asked ourselves: How do we bring the power of Generative AI to someone who on
 
 The answer is **GramAI**."
 
-## 🚀 [0:30 - 1:15] The Solution & Demo (Criterion: Innovation & Demo)
+## 🚀 [0:30 - 1:15] The Solution & Live Demo
 "GramAI is an AI Voice Assistant over a **simple phone call**. No apps. No internet.
 
 *Let me show you live.* 
@@ -24,20 +24,20 @@ The answer is **GramAI**."
 
 **(You say):** *"Mera naam Ramesh hai. Aaj Nashik mein pyaz ka kya rate chal raha hai?"*
 
-**(Action: Explain while the AI processes for 1-2 seconds)**
-"Right now, our backend is streaming my audio via WebSockets, transcribing my Hinglish in real-time, extracting my intent, and hitting the live Data.gov.in API to get the real price."
+**(Action: Explain while the AI processes for 1-2 seconds and the hold music plays)**
+"Right now, our backend is streaming my audio via WebSockets, transcribing my Hinglish in real-time, extracting my intent, and hitting the live Data.gov.in API to get the real price. Notice the hold music? That's our dynamic audio buffer ensuring there's zero dead air."
 
 *(AI answers with the live Nashik onion price).*
 
 "This isn't a hallucination. That is **real-time live data** injected into the LLM context mid-conversation."
 
-## 🧠 [1:15 - 2:00] The AI Magic (Criterion: Use of AI)
-"To make this work seamlessly, we had to solve several hard engineering problems using AI:
+## 🧠 [1:15 - 2:00] The Engineering Magic
+"To make this work seamlessly, we had to solve several hard HCI problems using AI:
 1. **The Static Problem:** Telecom lines have terrible static. We wrote a custom amplitude-based noise gate to filter out Exotel's line static so the AI doesn't hallucinate background noise.
 2. **Intent Routing:** We use Gemini 3.5 Flash to rapidly classify the caller's intent—whether they are asking about Weather, Mandi Prices, or Schemes—and we route the API calls accordingly.
 3. **Barge-in Detection:** If the farmer interrupts the AI, it instantly stops speaking and listens, just like a real human."
 
-## 📊 [2:00 - 2:30] The Business Value & Speed (Criterion: Execution Speed)
+## 📊 [2:00 - 2:30] The Platform & Speed
 "But we didn't just build a bot. We built a **platform**. 
 
 **(Action: Share screen showing the Next.js Dashboard)**
