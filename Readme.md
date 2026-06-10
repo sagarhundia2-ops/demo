@@ -84,31 +84,34 @@ Our foundation is built. Here is how we scale to millions of users:
 ```mermaid
 sequenceDiagram
     autonumber
-    actor User as 📞 User
-    participant Telecom as ☁️ Exotel
-    participant Backend as 🧠 Dial2AI
-    participant API as 🌍 APIs
+    actor User
+    participant Exotel
+    participant Dial2AI
+    participant APIs
 
-    User->>Telecom: Dials Number
-    Telecom->>Backend: Opens Audio Stream
-    Backend->>User: "Namaste! How can I help?"
+    User->>Exotel: Dials number
+    Exotel->>Dial2AI: Opens audio stream
+    Dial2AI->>User: "Namaste! How can I help?"
     
-    User->>Backend: Asks Question
+    User->>Dial2AI: Asks question
     
     rect rgb(30, 40, 60)
-    Note over Backend,API: ⚡ AI Processing Phase
-    Backend-->>User: 🎵 Plays Hold Music
-    Backend->>API: Fetches Live Data
-    API-->>Backend: Returns Data
+    Note right of Dial2AI: ⚡ AI Processing Phase
+    Dial2AI-->>User: 🎵 Plays hold music
+    Dial2AI->>APIs: Fetches live data
+    APIs-->>Dial2AI: Returns data
     end
 
-    Backend->>User: 🗣️ Speaks AI Response
-    User->>Telecom: Hangs Up Call
+    Dial2AI->>User: 🗣️ Speaks AI response
+    User->>Exotel: Hangs up call
     
-    Note over Backend: 📊 Post-Call Actions
-    Backend->>Backend: Logs to Dashboard
-    Backend-->>User: ✉️ Sends SMS Summary
+    rect rgb(40, 30, 50)
+    Note over Dial2AI: 📊 Post-Call Actions
+    Dial2AI-->>Dial2AI: Logs to dashboard
+    Dial2AI-->>User: ✉️ Sends SMS summary
+    end
 ```
+*(Legend: Solid lines = User/System actions | Dotted lines = Background/Async events)*
 
 ---
 
