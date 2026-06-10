@@ -4,8 +4,8 @@ The theme of this hackathon is **Vibe Coding**—using AI to build faster, think
 
 ## 0. The "Vibe Coding" Stack
 To build this at lightning speed, we used the following AI Developer Stack:
-* **IDE:** Cursor
-* **Architecture & Complex Logic:** Claude 3.5 Sonnet (via Cursor Composer)
+* **IDE:** Antigravity
+* **Architecture & Complex Logic:** Claude opus 4.6 (via antigravity)
 * **API Research & Bug Fixing:** Gemini 1.5 Pro
 * **Frontend Generation:** v0.dev & Cursor
 
