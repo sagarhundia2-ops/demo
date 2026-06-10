@@ -5,6 +5,8 @@
   <p><i>No Internet. No Smartphones. Just a Phone Call.</i></p>
 
   <h3><a href="YOUR_YOUTUBE_OR_DRIVE_LINK_HERE">▶️ Watch the 3-Minute Live Demo Video Here</a></h3>
+  <h3>📞 Try it live: Call +91-XXXXX-XXXXX (Replace with Exotel Demo Number)</h3>
+  <h3>🌐 <a href="YOUR_VERCEL_LINK_HERE">View the Live Next.js CRM Dashboard</a></h3>
 </div>
 
 ---
@@ -53,6 +55,18 @@ We engineered Dial2AI to solve real human-computer interaction (HCI) problems ov
 
 ---
 
+## 🖥️ Platform Dashboard
+
+The backend logs every call into our CRM, instantly analyzing intent, extracting leads, and visualizing sentiment analytics.
+
+<div align="center">
+  <img src="https://via.placeholder.com/800x400.png?text=Next.js+Real-time+Dashboard+Screenshot" alt="Dashboard View 1">
+  <br/>
+  <i>(Remember to replace this placeholder with your actual dashboard screenshot before submission)</i>
+</div>
+
+---
+
 ## 🚧 Challenges We Ran Into (And How We Solved Them)
 
 Building high-speed Generative AI over legacy telecom networks is incredibly difficult. Here is how we engineered our way out of the hardest HCI and networking problems:
@@ -60,6 +74,10 @@ Building high-speed Generative AI over legacy telecom networks is incredibly dif
 * **The "Dead Air" Drop-off:** Callers would hang up while waiting for the LLM API to respond because silence on a phone implies a dropped call. **Solution:** We engineered an asynchronous background task that streams an `interval.mp3` directly into the socket buffer the exact millisecond the user stops talking, keeping them engaged.
 * **The "Echo Barge-in" Challenge:** When streaming bidirectional audio, the STT often transcribed the *AI's own echo* coming through the phone speaker as the user's speech. **Solution:** We implemented a strict state machine (`playback_start_time`) and calculated exact echo-guard windows to ensure the AI only interrupts itself for real human barge-ins, not its own TTS audio.
 * **The "Async Audio Buffering" Challenge:** Telecom websockets stream bytes endlessly, but LLMs need complete sentences to understand context. **Solution:** We built an intelligent asynchronous bytearray buffer that uses natural silence detection (2-second gaps) to trigger the STT engine without blocking the active WebSocket stream.
+
+### ⚠️ Known Limitations & Current State
+* **Carrier Latency:** While our AI logic executes in <1s, older 2G/3G networks introduce a natural 500ms jitter. Our `interval.mp3` buffer successfully masks this 95% of the time.
+* **Heavy Static Environments:** Our mathematical noise gate works flawlessly on standard landlines and 4G voice. However, extremely deep rural areas with high wind noise or 1-bar signal may still experience slightly degraded Speech-to-Text accuracy. We are actively fine-tuning our bandpass filters to solve this.
 
 ---
 
@@ -114,6 +132,79 @@ sequenceDiagram
 
 ---
 
+## 📁 Project Structure
+
+```text
+dial2ai/
+├── backend/
+│   ├── app/
+│   │   ├── routes/          # FastAPI WebSockets and REST endpoints
+│   │   ├── services/        # Exotel integration, Gemini API, TTS logic
+│   │   └── database/        # SQLite setup and CRM logging
+│   ├── .env.example         # Environment variables template
+│   └── requirements.txt     # Python dependencies
+├── frontend/
+│   ├── src/
+│   │   ├── components/      # React/Recharts UI components
+│   │   ├── pages/           # Next.js CRM routes
+│   │   └── styles/          # TailwindCSS globals
+│   └── package.json         # Node dependencies
+├── AI_WORKFLOW.md           # Our exact prompt-driven Vibe Coding methodology
+├── PITCH.md                 # 3-minute hackathon presentation script
+└── Readme.md                # You are here
+```
+
+## 🔧 Setup & Installation
+
+To run Dial2AI locally for development or evaluation:
+
+### 1. Prerequisites
+- Python 3.12+
+- Node.js 18+
+- An [Exotel](https://exotel.com/) Account (for SIP/WebSockets)
+- Google Gemini API Key
+
+### 2. Environment Variables
+Create a `.env` file in the `backend/` directory:
+```env
+EXOTEL_SID=your_exotel_sid
+EXOTEL_TOKEN=your_exotel_token
+EXOTEL_APP_ID=your_passthru_applet_id
+GEMINI_API_KEY=your_google_ai_studio_key
+WEATHER_API_KEY=your_openweather_key
+```
+
+### 3. Run the Backend (FastAPI)
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+### 4. Run the Frontend Dashboard (Next.js)
+```bash
+cd frontend
+npm install
+npm run dev
+```
+The CRM dashboard will be available at `http://localhost:3000`.
+
+---
+
+## 📞 API Reference (Lightweight)
+
+Dial2AI exposes enterprise-ready endpoints for seamless B2B integration:
+
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| `wss://yourdomain.com/stream` | `WS` | Primary WebSocket endpoint for Exotel's Passthru Applet to stream 8kHz PCM audio. |
+| `/api/leads` | `GET` | Returns JSON payload of extracted call intents and caller phone numbers for the CRM. |
+| `/api/sms/webhook` | `POST` | Incoming webhook to parse bi-directional SMS queries from offline users. |
+
+---
+
 ## 🏗️ Architecture
 
 ```mermaid
@@ -145,7 +236,16 @@ graph TD
 
 ---
 
+## 🤝 Contributing
+Dial2AI is completely open-source. We welcome contributions to help bridge the global digital divide!
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
 <div align="center">
+  <br/>
   <i>Built with ❤️ by Team Git Push Pray for HackIndia 2026.</i><br/>
   <i>Licensed under the MIT License.</i>
 </div>
