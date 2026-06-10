@@ -84,34 +84,39 @@ Our foundation is built. Here is how we scale to millions of users:
 ```mermaid
 sequenceDiagram
     autonumber
-    actor User
+    participant User
     participant Exotel
     participant Dial2AI
     participant APIs
 
     User->>Exotel: Dials number
+    activate Exotel
     Exotel->>Dial2AI: Opens audio stream
+    activate Dial2AI
     Dial2AI->>User: "Namaste! How can I help?"
     
     User->>Dial2AI: Asks question
     
     rect rgb(30, 40, 60)
     Note right of Dial2AI: ⚡ AI Processing Phase
-    Dial2AI-->>User: 🎵 Plays hold music
+    Dial2AI-->>Exotel: 🎵 Plays hold music
     Dial2AI->>APIs: Fetches live data
+    activate APIs
     APIs-->>Dial2AI: Returns data
+    deactivate APIs
     end
 
     Dial2AI->>User: 🗣️ Speaks AI response
     User->>Exotel: Hangs up call
+    deactivate Exotel
     
     rect rgb(40, 30, 50)
     Note over Dial2AI: 📊 Post-Call Actions
     Dial2AI-->>Dial2AI: Logs to dashboard
     Dial2AI-->>User: ✉️ Sends SMS summary
+    deactivate Dial2AI
     end
 ```
-*(Legend: Solid lines = User/System actions | Dotted lines = Background/Async events)*
 
 ---
 
