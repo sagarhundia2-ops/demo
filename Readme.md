@@ -42,7 +42,7 @@ Built entirely using **Prompt-Driven Development (Vibe Coding)**, this project d
 
 We engineered Dial2AI to solve real human-computer interaction (HCI) problems over telecom:
 
-1. **🎵 Dynamic Hold Music (Zero Dead Air):** LLMs take 1-2 seconds to generate a response. In telecom, silence feels like a dropped call. To solve this, our WebSocket instantly begins streaming `interval.mp3` (hold music) the moment the caller stops speaking, cutting the music the exact millisecond the AI reply is ready.
+1. **🎵 Dynamic Hold Music:** LLMs take 1-2 seconds to generate a response. In telecom, silence feels like a dropped call. To solve this, our WebSocket instantly begins streaming `interval.mp3` (hold music) the moment the caller stops speaking, cutting the music the exact millisecond the AI reply is ready.
 2. **🧠 Conversational Memory:** The system maintains a session-based conversation history, allowing the user to ask follow-up questions without repeating context.
 3. **🤫 Custom Noise Gating (`contains_speech`):** We wrote a custom amplitude-based filter to ignore telecom line static, preventing the AI from hallucinating background noise.
 4. **🚫 Barge-in Interruption:** The AI stops speaking instantly if the user interrupts it, mimicking natural human conversation.
@@ -81,14 +81,25 @@ Our foundation is built. Here is how we scale to millions of users:
 
 ## 🔄 The User Workflow (How it works in action)
 
-1. **The Dial:** The farmer dials the Dial2AI toll-free Exotel number from any basic feature phone.
-2. **The Greeting:** The FastAPI backend instantly answers and plays a synthesized greeting: *"Namaste! Dial2AI mein aapka swagat hai. Aap apna sawaal boliye."*
-3. **The Query:** The farmer naturally asks their question in regional Hindi/Hinglish (e.g., *"Aaj Nashik mandi mein pyaz ka kya rate hai?"*).
-4. **The Processing (Zero Dead Air):** While the farmer pauses, the system immediately plays soothing holding music (`interval.mp3`). Simultaneously, the AI transcribes the audio, classifies the intent, and fetches live data from the government API.
-5. **The AI Response:** The music instantly stops, and the AI speaks the live data back to the farmer in a natural, empathetic voice.
-6. **Follow-Up & Memory:** The AI asks if there are any other questions. The farmer can ask follow-ups, and the AI remembers the context of the conversation.
-7. **Post-Call Analytics:** Once the user hangs up, the backend extracts the caller's intent, location, and sentiment, logs it to the SQLite database, and pushes it as a qualified lead to the Next.js analytics dashboard.
-8. **SMS Summary:** Seconds after the call ends, the farmer receives an SMS containing a text summary of the information they requested for future reference.
+```mermaid
+sequenceDiagram
+    participant F as Farmer (Feature Phone)
+    participant E as Exotel Telecom
+    participant B as Dial2AI Backend
+    participant A as Gemini AI & APIs
+    
+    F->>E: Dials Toll-Free Number
+    E->>B: Triggers WebSocket Stream
+    B->>F: Plays Greeting ("Namaste!")
+    F->>B: Asks Question in Regional Language
+    B->>F: Plays Hold Music (interval.mp3)
+    B->>A: Audio STT + Intent Classification
+    A-->>B: Fetches Live Data (Mandi/Weather)
+    B->>F: AI Speaks Response (Stops Hold Music)
+    F->>E: Hangs Up Call
+    B->>B: Logs Lead to SQLite & Dashboard
+    B->>F: Sends SMS Summary
+```
 
 ---
 
@@ -117,11 +128,11 @@ graph TD
     K --> M["Next.js Dashboard"]
 ```
 
-## 🛠️ Tech Stack
-* **AI/LLMs:** Google Gemini 2.5 Flash (STT), Gemini 3.5 Flash (Reasoning & Analytics), Google TTS.
-* **Backend:** Python, FastAPI, WebSockets, SQLite, FFmpeg.
+## 🛠️ Tech Stack & Libraries
+* **AI/LLMs:** Google Gemini 2.5 Flash (STT), Gemini 3.5 Flash (Reasoning & Analytics), `google-genai` SDK, Google TTS (`gTTS`).
+* **Backend:** Python 3.12, `FastAPI` (Async API), `websockets` (Real-time audio), `uvicorn` (ASGI Server), `httpx` (Async HTTP), `pydantic`, `sqlite3` (Database), `FFmpeg` (Audio processing).
 * **Telephony:** Exotel (Passthru Applets, SMS API).
-* **Frontend Dashboard:** Next.js, React, TailwindCSS, Recharts.
+* **Frontend Dashboard:** `Next.js 14`, `React`, `TailwindCSS` (Styling), `Recharts` (Analytics Charts), `Lucide-React` (Icons).
 
 ---
 
