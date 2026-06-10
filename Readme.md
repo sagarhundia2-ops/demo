@@ -84,28 +84,30 @@ Our foundation is built. Here is how we scale to millions of users:
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Caller as 📞 User (Any Phone)
-    participant Cloud as ☁️ Exotel Telecom
-    participant AI as 🧠 Dial2AI Backend
-    participant APIs as 🌍 External APIs
+    actor User as 📞 User
+    participant Telecom as ☁️ Exotel
+    participant Backend as 🧠 Dial2AI
+    participant API as 🌍 APIs
 
-    Caller->>Cloud: Dials Toll-Free Number
-    Cloud->>AI: Opens Real-Time Audio Stream
-    AI->>Caller: "Namaste! How can I help?"
+    User->>Telecom: Dials Number
+    Telecom->>Backend: Opens Audio Stream
+    Backend->>User: "Namaste! How can I help?"
     
-    Caller->>AI: Asks Question (Any Language)
+    User->>Backend: Asks Question
     
     rect rgb(30, 40, 60)
-    Note right of AI: AI Processing Phase
-    AI->>Caller: 🎵 Plays Hold Music
-    AI->>APIs: Fetches Live Data / Classifies Intent
-    APIs-->>AI: Returns Live Context
+    Note over Backend,API: ⚡ AI Processing Phase
+    Backend-->>User: 🎵 Plays Hold Music
+    Backend->>API: Fetches Live Data
+    API-->>Backend: Returns Data
     end
 
-    AI->>Caller: 🗣️ Speaks AI Response
-    Caller->>Cloud: Hangs Up
-    AI->>AI: 📊 Logs Lead to Analytics Dashboard
-    AI->>Caller: ✉️ Sends SMS Summary
+    Backend->>User: 🗣️ Speaks AI Response
+    User->>Telecom: Hangs Up Call
+    
+    Note over Backend: 📊 Post-Call Actions
+    Backend->>Backend: Logs to Dashboard
+    Backend-->>User: ✉️ Sends SMS Summary
 ```
 
 ---
