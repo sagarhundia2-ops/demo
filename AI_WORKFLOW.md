@@ -2,7 +2,14 @@
 
 The theme of this hackathon is **Vibe Coding**—using AI to build faster, think in ideas, and use prompts as our primary interface. 
 
-To score maximum points in the **Use of AI** and **Execution Speed** criteria, here is exactly how we used AI to build GramAI from scratch in record time.
+## 0. The "Vibe Coding" Stack
+To build this at lightning speed, we used the following AI Developer Stack:
+* **IDE:** Cursor
+* **Architecture & Complex Logic:** Claude 3.5 Sonnet (via Cursor Composer)
+* **API Research & Bug Fixing:** Gemini 1.5 Pro
+* **Frontend Generation:** v0.dev & Cursor
+
+Here is exactly how we directed these models to build Dial2AI.
 
 ## 1. Zero-to-One Architecture Generation
 We did not write boilerplate. We used high-level architectural prompts to generate the entire foundation.

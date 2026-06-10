@@ -3,6 +3,8 @@
   <h1>📞 Dial2AI</h1>
   <p><strong>Bridging the digital divide for 350+ Million Indians using AI over Phone Calls.</strong></p>
   <p><i>No Internet. No Smartphones. Just a Phone Call.</i></p>
+
+  <h3><a href="YOUR_YOUTUBE_OR_DRIVE_LINK_HERE">▶️ Watch the 3-Minute Live Demo Video Here</a></h3>
 </div>
 
 ---
@@ -51,6 +53,28 @@ We engineered Dial2AI to solve real human-computer interaction (HCI) problems ov
 
 ---
 
+## 🚧 Challenges We Ran Into (And How We Solved Them)
+
+Building high-speed AI over legacy telecom networks is incredibly difficult. Here is how we engineered our way out of the hardest problems:
+* **The "Telecom Static" Problem:** Exotel's WebSocket audio format is raw 16-bit PCM. The line always has background static, which the Gemini STT interpreted as endless whispering (hallucinations). **Solution:** We vibe-coded a custom mathematical amplitude gate (`get_avg_amplitude`) to dynamically filter out frequencies below a certain decibel threshold before sending it to the STT engine.
+* **The "Dead Air" Drop-off:** Callers would hang up while waiting for the LLM API to respond because silence on a phone implies a dropped call. **Solution:** We engineered an asynchronous background task that streams an `interval.mp3` directly into the socket buffer the exact millisecond the user stops talking, keeping them engaged.
+
+---
+
+## 💰 Business Model & Scalability
+
+Dial2AI is not just a hackathon project; it is designed to be a financially sustainable, highly scalable enterprise platform:
+1. **B2G (Business to Government):** Licensing the platform as a white-labeled API to Krishi Vigyan Kendras (KVKs) and the Ministry of Agriculture to replace their overwhelmed human call centers.
+2. **B2B (Agri-Tech Startups):** Providing our voice API to companies like DeHaat, Ninjacart, or AgroStar, charging a per-minute latency fee to automate their farmer support lines.
+
+## 🗺️ What's Next (The Roadmap)
+
+* **Multilingual Expansion:** Adding native support for Tamil, Telugu, Marathi, and Bengali to cover the entire Indian subcontinent.
+* **Voice-Based UPI Payments:** Allowing users to execute secure financial transactions (e.g., paying for seeds) purely via voice authentication and DTMF tones.
+* **Offline Edge Deployments:** Hosting smaller quantized models (like Llama-3-8B) on local government servers to ensure complete data privacy and reduce API costs.
+
+---
+
 ## 🏗️ Architecture
 
 We built a highly scalable, async event-driven architecture using Python FastAPI, Next.js, and WebSockets.
@@ -85,5 +109,6 @@ graph TD
 ---
 
 <div align="center">
-  <i>Built with ❤️ by Team Git Push Pray for HackIndia 2026.</i>
+  <i>Built with ❤️ by Team Git Push Pray for HackIndia 2026.</i><br/>
+  <i>Licensed under the MIT License.</i>
 </div>
