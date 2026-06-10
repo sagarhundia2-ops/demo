@@ -33,7 +33,9 @@ The answer is **Dial2AI**."
 
 ## 🧠 [1:15 - 2:00] Competitive Edge & Engineering
 "Why are we better than what exists?
-WhatsApp bots require internet and typing literacy. Traditional Kisan Call Centers have massive wait times and can't scale. Dial2AI is **infinitely scalable** and requires zero digital literacy.
+WhatsApp bots and apps like Pocket Pal AI require smartphones, internet, and digital literacy. Advanced tools like Google AI Edge Gallery require expensive hardware capable of running on-device AI. Traditional Kisan Call Centers have massive wait times. 
+
+Dial2AI is **hardware agnostic, infinitely scalable, and requires zero app downloads**. 
 
 To make this work seamlessly, we had to solve hard HCI problems:
 1. **The Static Problem:** Telecom lines have terrible static. We wrote a custom amplitude-based noise gate to filter out Exotel's line static so the AI doesn't hallucinate background noise.
