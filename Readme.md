@@ -79,6 +79,19 @@ Our foundation is built. Here is how we scale to millions of users:
 
 ---
 
+## 🔄 The User Workflow (How it works in action)
+
+1. **The Dial:** The farmer dials the Dial2AI toll-free Exotel number from any basic feature phone.
+2. **The Greeting:** The FastAPI backend instantly answers and plays a synthesized greeting: *"Namaste! Dial2AI mein aapka swagat hai. Aap apna sawaal boliye."*
+3. **The Query:** The farmer naturally asks their question in regional Hindi/Hinglish (e.g., *"Aaj Nashik mandi mein pyaz ka kya rate hai?"*).
+4. **The Processing (Zero Dead Air):** While the farmer pauses, the system immediately plays soothing holding music (`interval.mp3`). Simultaneously, the AI transcribes the audio, classifies the intent, and fetches live data from the government API.
+5. **The AI Response:** The music instantly stops, and the AI speaks the live data back to the farmer in a natural, empathetic voice.
+6. **Follow-Up & Memory:** The AI asks if there are any other questions. The farmer can ask follow-ups, and the AI remembers the context of the conversation.
+7. **Post-Call Analytics:** Once the user hangs up, the backend extracts the caller's intent, location, and sentiment, logs it to the SQLite database, and pushes it as a qualified lead to the Next.js analytics dashboard.
+8. **SMS Summary:** Seconds after the call ends, the farmer receives an SMS containing a text summary of the information they requested for future reference.
+
+---
+
 ## 🏗️ Architecture
 
 We built a highly scalable, async event-driven architecture using Python FastAPI, Next.js, and WebSockets.
