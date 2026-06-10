@@ -55,9 +55,11 @@ We engineered Dial2AI to solve real human-computer interaction (HCI) problems ov
 
 ## 🚧 Challenges We Ran Into (And How We Solved Them)
 
-Building high-speed AI over legacy telecom networks is incredibly difficult. Here is how we engineered our way out of the hardest problems:
+Building high-speed Generative AI over legacy telecom networks is incredibly difficult. Here is how we engineered our way out of the hardest HCI and networking problems:
 * **The "Telecom Static" Problem:** Exotel's WebSocket audio format is raw 16-bit PCM. The line always has background static, which the Gemini STT interpreted as endless whispering (hallucinations). **Solution:** We vibe-coded a custom mathematical amplitude gate (`get_avg_amplitude`) to dynamically filter out frequencies below a certain decibel threshold before sending it to the STT engine.
 * **The "Dead Air" Drop-off:** Callers would hang up while waiting for the LLM API to respond because silence on a phone implies a dropped call. **Solution:** We engineered an asynchronous background task that streams an `interval.mp3` directly into the socket buffer the exact millisecond the user stops talking, keeping them engaged.
+* **The "Echo Barge-in" Challenge:** When streaming bidirectional audio, the STT often transcribed the *AI's own echo* coming through the phone speaker as the user's speech. **Solution:** We implemented a strict state machine (`playback_start_time`) and calculated exact echo-guard windows to ensure the AI only interrupts itself for real human barge-ins, not its own TTS audio.
+* **The "Async Audio Buffering" Challenge:** Telecom websockets stream bytes endlessly, but LLMs need complete sentences to understand context. **Solution:** We built an intelligent asynchronous bytearray buffer that uses natural silence detection (2-second gaps) to trigger the STT engine without blocking the active WebSocket stream.
 
 ---
 
@@ -69,9 +71,11 @@ Dial2AI is not just a hackathon project; it is designed to be a financially sust
 
 ## 🗺️ What's Next (The Roadmap)
 
-* **Multilingual Expansion:** Adding native support for Tamil, Telugu, Marathi, and Bengali to cover the entire Indian subcontinent.
-* **Voice-Based UPI Payments:** Allowing users to execute secure financial transactions (e.g., paying for seeds) purely via voice authentication and DTMF tones.
-* **Offline Edge Deployments:** Hosting smaller quantized models (like Llama-3-8B) on local government servers to ensure complete data privacy and reduce API costs.
+Our foundation is built. Here is how we scale to millions of users:
+* **Toll-Free "Missed Call" Architecture:** Currently, users call a standard Exotel number which may incur carrier charges. In the future, we will implement a true "Missed Call" flow: the system instantly disconnects the incoming call (costing the farmer ₹0) and automatically triggers an outbound callback to begin the AI session.
+* **Auto-Location Detection:** Integrating telecom network APIs to securely auto-detect the caller's district, removing the need for them to specify their city to get accurate weather or Mandi prices.
+* **Bi-Directional SMS Querying:** We currently send an automated post-call summary SMS, but we are building an inbound SMS parser. Farmers with low 2G network bars can simply text "Pyaz rate Nashik" to the same number and receive an AI-generated SMS instantly without even needing to call.
+* **Expanding the API Ecosystem:** Integrating deeper into hyper-local government datasets (Agmarknet, IMD APIs) to provide even faster, more precise, and hyper-personalized agronomic advice.
 
 ---
 
