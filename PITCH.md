@@ -8,9 +8,9 @@
 
 Right now, in 2026, the tech world is obsessed with building 5G web apps. But we are forgetting the **disconnected**. 
 
-Over **350 Million people** in India still use basic feature phones. Nearly **50% of our rural population** lacks reliable internet. Because of this digital divide, they get scammed by middlemen, they don't know the real Mandi prices, and they miss out on critical government schemes.
+Over **350 Million people** in India still use basic feature phones. Nearly **50% of our population** lacks reliable internet. Because of this digital divide, millions of citizens—from the elderly to rural workers—are entirely cut off from the Generative AI revolution.
 
-We asked ourselves: How do we bring the power of Generative AI to someone who only has a **$10 Nokia phone?**
+We asked ourselves: How do we bring the absolute cutting-edge power of AI to someone who only has a **$10 Nokia phone?**
 
 The answer is **Dial2AI**."
 
@@ -25,7 +25,7 @@ The answer is **Dial2AI**."
 **(You say):** *"Mera naam Ramesh hai. Aaj Nashik mein pyaz ka kya rate chal raha hai?"*
 
 **(Action: Explain while the AI processes for 1-2 seconds and the hold music plays)**
-"Right now, our backend is streaming my audio via WebSockets, transcribing my Hinglish in real-time, extracting my intent, and hitting the live Data.gov.in API to get the real price. Notice the hold music? That's our dynamic audio buffer ensuring there's zero dead air on the line."
+"Right now, our backend is streaming my audio via WebSockets, transcribing my Hinglish in real-time, extracting my intent, and hitting live government APIs to get the real answer. Notice the hold music? That's our dynamic audio buffer ensuring there's zero dead air on the line."
 
 *(AI answers with the live Nashik onion price).*
 
@@ -33,7 +33,7 @@ The answer is **Dial2AI**."
 
 ## 🧠 [1:15 - 2:00] Competitive Edge & Engineering
 "Why are we better than what exists?
-WhatsApp bots and apps like Pocket Pal AI require smartphones, internet, and digital literacy. Advanced tools like Google AI Edge Gallery require expensive hardware capable of running on-device AI. Traditional Kisan Call Centers have massive wait times. 
+WhatsApp bots and apps like Pocket Pal AI require smartphones, internet, and digital literacy. Advanced tools like Google AI Edge Gallery require expensive hardware capable of running on-device AI. 
 
 Dial2AI is **hardware agnostic, infinitely scalable, and requires zero app downloads**. 
 
@@ -53,7 +53,7 @@ And look at this—**(Show your phone screen)**—as soon as the call ended, our
 We built this entire full-stack platform in just a few days entirely using **Vibe Coding**. Prompt-driven development allowed us to iterate at the speed of thought."
 
 ## 🏁 [2:30 - 3:00] The Closing
-"Dial2AI isn't just a hackathon prototype. It's a scalable solution ready to deploy across the country. 
+"Dial2AI isn't just a hackathon prototype. It's a scalable solution ready to deploy as a public service helpline or enterprise customer support engine across the country. 
 
 We are turning ideas into products, and bringing the AI revolution to the people who need it the most. 
 
